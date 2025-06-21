@@ -43,10 +43,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Include directories for header files
 target_include_directories(${PROJECT_NAME} PRIVATE 
-    ${CMAKE_SOURCE_DIR}/include/controllers
-    ${CMAKE_SOURCE_DIR}/include/objects
-    ${CMAKE_SOURCE_DIR}/include/scenes
-    ${CMAKE_SOURCE_DIR}/include/gui
+    ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_BINARY_DIR} 
 )
 
