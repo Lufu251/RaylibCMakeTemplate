@@ -70,7 +70,7 @@ private:
             } break;
 
             case SceneType::MENU : {
-                MenuScene* play = static_cast<MenuScene*>(currentScene);
+                MenuScene* menu = static_cast<MenuScene*>(currentScene);
                 if (IsKeyPressed(KEY_ESCAPE)) {
                     SetScene(SceneType::PLAY);
                 }
