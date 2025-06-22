@@ -1,5 +1,5 @@
 # ProjectName
-ToDo Description
+ToDo summary
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -16,8 +16,8 @@ ToDo Description
 ## About The Project
 - ToDo
 
-## Installation
-- The project is useing RAYLIB and RAYGUI.
+## Building
+- The project is useing RAYLIB.
 - With the provided CMakeLists.txt you should be able to compile the project on Windows and Linux.
 - [x] Install CMake
 - [x] Install any C++ compiler
