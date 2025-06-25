@@ -1,54 +1,151 @@
 # Minimum required version of CMake
-cmake_minimum_required(VERSION 3.14)
-
-# Use modern policy settings for CMake 3.14 and above
-cmake_policy(VERSION 3.14)
-
+cmake_minimum_required(VERSION 3.22)
 # Project name and version
 project(MyCppProject VERSION 1.0)
 
 # Set the C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Optional: Enable Sanitizers
-option(ENABLE_SANITIZERS "Enable Address and Undefined Behavior sanitizers" OFF)
-if(ENABLE_SANITIZERS)
-    # Apply sanitizers for Debug builds
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,undefined")
+# Build for web instructions
+if (EMSCRIPTEN)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1")
+    set(CMAKE_EXECUTABLE_SUFFIX ".html") # This line is used to set your executable to build with the emscripten html template so that you can directly open it.
+endif ()
+
+##########################################################################################
+# Configurable options
+##########################################################################################
+
+# toggle libs to be used with ON and OFF
+option(USE_RAYLIB "Use raylib" ON)
+option(USE_RAYGUI "Use raygui" OFF)
+option(USE_BOX2D "Use Box2D" OFF)
+option(USE_LDTKLOADER "Use LDtk Loader" OFF)
+
+
+##########################################################################################
+# Add dependencies with FetchContent
+##########################################################################################
+
+# libraries array to be linked
+set(LIBRARIES ${PROJECT_NAME})
+
+include(FetchContent)
+function(add_git_dependency libName gitURL gitTag)
+    message(STATUS "Fetching ${libName}...")
+
+    FetchContent_Declare(${libName}
+        GIT_REPOSITORY ${gitURL}
+        GIT_TAG        ${gitTag}
+        GIT_SHALLOW    TRUE
+        GIT_PROGRESS   TRUE
+    )
+
+    FetchContent_MakeAvailable(${libName})
+endfunction()
+
+
+##########################################################################################
+# Raylib Setup
+##########################################################################################
+
+if(USE_RAYLIB)
+    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+    set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # don't build the supplied example games
+    set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+    set(CUSTOMIZE_BUILD OFF CACHE BOOL "" FORCE) 
+
+    add_git_dependency(
+        raylib
+        https://github.com/raysan5/raylib.git
+        master
+    )
+
+    # add the dependency here to be linked
+    list(APPEND LIBRARIES raylib)
 endif()
 
-# Include FetchContent for external dependencies
-include(FetchContent)
 
-# --------------- RAYLIB ---------------
-message(STATUS "Fetching Raylib...")
-FetchContent_Declare(
-    raylib
-    GIT_REPOSITORY  https://github.com/raysan5/raylib.git
-    GIT_SHALLOW True
-    #GIT_TAG         5.0
-)
+##########################################################################################
+# Raygui Setup
+##########################################################################################
 
-# Disable building of examples and shared libraries
-option(BUILD_EXAMPLES "Build example of how to use this library." OFF)
-option(BUILD_SHARED_LIBS "Build shared libs." OFF)
-# set(GRAPHICS "GRAPHICS_API_OPENGL_43" FORCE)
+if(USE_RAYGUI)
+    set(BUILD_RAYGUI_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-FetchContent_MakeAvailable(raylib)
-# --------------- RAYLIB ---------------
+    add_git_dependency(
+        raygui
+        https://github.com/raysan5/raygui.git
+        master
+    )
 
-# Add source files to the project
-# You can list all your source files here, or use a glob pattern to include all .cpp files in a directory
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+    # add the dependency here to be linked
+    list(APPEND LIBRARIES raygui)
+endif()
 
-# Specify the output directories for compiled binaries and libraries
+
+##########################################################################################
+# Box2D Setup
+##########################################################################################
+
+if(USE_BOX2D)
+    set(BOX2D_BUILD_TESTBED OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+    set(BOX2D_BUILD_UNIT_TESTS OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+
+    add_git_dependency(
+        box2d
+        https://github.com/erincatto/box2d.git
+        master
+    )
+
+    # add the dependency here to be linked
+    list(APPEND LIBRARIES box2d)
+endif()
+
+
+##########################################################################################
+# LDtk Loader Setup
+##########################################################################################
+
+if(USE_LDTKLOADER)
+    add_git_dependency(
+        LDtkLoader
+        https://github.com/Madour/LDtkLoader.git
+        master
+    )
+
+    # add the dependency here to be linked
+    list(APPEND LIBRARIES LDtkLoader)
+endif()
+
+
+##########################################################################################
+# Project executable setup
+##########################################################################################
+
+# Specify the output directories for compiled binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Add an executable target
-add_executable(${PROJECT_NAME} ${SOURCES})
+# Adding our source files
+# Define PROJECT_SOURCES as a list of all source files
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*.cpp")
+
+# Define PROJECT_INCLUDE to be the path to the include directory of the project
+set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/include/")
+
+# Declaring our executable
+add_executable(${PROJECT_NAME})
+target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_INCLUDE})
+
+
+##########################################################################################
+# Project build settings
+##########################################################################################
+
+# Link libraries
+target_link_libraries(${LIBRARIES})
 
 # Set common compiler options for your target
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -57,12 +154,3 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     -Wpedantic   # Strict ISO C++ compliance warnings
     # Add other warning flags like -Wshadow, -Wconversion, etc. as needed
 )
-
-# Include directories for header files
-target_include_directories(${PROJECT_NAME} PRIVATE 
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_BINARY_DIR} 
-)
-
-# Link libraries
-target_link_libraries(${PROJECT_NAME} PUBLIC raylib)
