@@ -1,36 +1,63 @@
-# ProjectName
-ToDo summary
+# Raylib Template
+This template simplifies the setup process for Raylib using CMake. It supports automatic fetching of some pre-selected libraries. This template is designed to work for web and desktop builds. It's an easy way to start an awesome Raylib project!
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#wiki">Wiki</a></li>
-    <li><a href="#media">Media</a></li>
-    <li><a href="#credit">Media</a></li>
-  </ol>
-</details>
+* [Features](#features)
+* [Building](#building)
+* [Media](#media)
+* [License](#license)
 
-## About The Project
-- ToDo
+## Features
+* **Automatic fetching:** You can automaticaly use some pre-selected libraries by turning them on and off
+* **Build for the Web:** To build and compile your project for the web with ease
+* **CMake Build:** System: Easy to configure and build the a new project and examples.
+* **LufuGameLib:** Provides additional usefull features to raylib and more
 
 ## Building
-- The project is useing RAYLIB.
-- With the provided CMakeLists.txt you should be able to compile the project on Windows and Linux.
-- [x] Install CMake
-- [x] Install any C++ compiler
-- [x] Build and compile the project with CMake
-- [x] Run the project
 
-## Wiki
-### Example1
-- ToDo
-### Example2
-- ToDo
+### Prerequisites
+* Compiler (GCC, Clang, MSVC)
+* CMake
+* Emscripten (only WEB)
+* Python 3.8 or newer (only WEB)
+* Git (Recommended)
+
+### CMake Build
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Lufu251
+    cd wgvk
+    ```
+
+2.  **Configure and build with CMake:**
+    ```bash
+    mkdir build
+    cd build
+    cmake ..
+    cmake --build .
+    ```
+    The example binaries will be located in the `build/bin` directory.
+
+### Emscripten Build
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Lufu251
+    cd wgvk
+    ```
+
+2.  **Configure and build with Emscripten:**
+    ```bash
+    cd tools
+    ./build_web.sh
+    ```
+    Now there should be a HTTP Server running under port 8000 to test your project. The URL should be visible in the active terminal.
+
+## Notes
+* Here is some usefull information on how to use raylib for the web and how to solve some common issues: https://github.com/raysan5/raylib/wiki/Working-for-Web-(HTML5)
 
 ## Media
-- ToDo (Add Images of the project here)
 
-## Credit
+
+## License
+No License provided
