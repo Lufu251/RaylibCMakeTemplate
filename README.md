@@ -3,6 +3,7 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 * [Features](#features)
 * [Building](#building)
+* [Notes](#notes)
 * [Media](#media)
 * [License](#license)
 
@@ -54,7 +55,7 @@ This template simplifies the setup process for Raylib using CMake. It supports a
     Now there should be a HTTP Server running under port 8000 to test your project. The URL should be visible in the active terminal.
 
 ## Notes
-* Here is some usefull information on how to use raylib for the web and how to solve some common issues: https://github.com/raysan5/raylib/wiki/Working-for-Web-(HTML5)
+* Usefull information on how to use raylib for the web and how to solve some common issues: https://github.com/raysan5/raylib/wiki/Working-for-Web-(HTML5)
 
 ## Media
 
