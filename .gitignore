@@ -1,6 +1,10 @@
+# General
 .vscode
 .cache
+
+# Build folder
 build
 build-web
 
-TODO.md
+# Custom
+ToDo.md
