@@ -11,7 +11,6 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 * **Automatic fetching:** You can automaticaly use some pre-selected libraries by turning them on and off
 * **Build for the Web:** To build and compile your project for the web with ease
 * **CMake Build:** System: Easy to configure and build the a new project and examples.
-* **LufuGameLib:** Provides additional usefull features to raylib and more
 
 ## Building
 
