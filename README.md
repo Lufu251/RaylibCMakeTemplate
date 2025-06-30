@@ -61,4 +61,4 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 
 ## License
-No License provided
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
