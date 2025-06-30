@@ -26,8 +26,9 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Lufu251/RaylibTemplate.git
-    cd RaylibTemplate
+    git clone https://github.com/Lufu251/RaylibTemplate.git <new-project-name>
+    cd <new-project-name>
+    rm -rf .git
     ```
 
 2.  **Configure and build with CMake:**
@@ -43,8 +44,9 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Lufu251/RaylibTemplate.git
-    cd RaylibTemplate
+    git clone https://github.com/Lufu251/RaylibTemplate.git <new-project-name>
+    cd <new-project-name>
+    rm -rf .git
     ```
 
 2.  **Configure and build with Emscripten:**
