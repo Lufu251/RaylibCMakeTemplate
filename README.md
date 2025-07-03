@@ -12,11 +12,10 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 ## Notes
 * (Add a controls here)
-
+* (Add a additional information here)
 
 ## Media
 * (Add a screenshot or GIF of your project here)
-* (Add a additional information here)
 
 ## Building
 
@@ -46,4 +45,4 @@ This template simplifies the setup process for Raylib using CMake. It supports a
     Now there should be a HTTP Server running under port 8000 to test your project. The URL should be visible in the active terminal.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
