@@ -15,6 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(USE_RAYLIB "Use raylib" ON)
 option(USE_RAYGUI "Use raygui" ON)
 option(USE_BOX2D "Use Box2D" OFF)
+option(USE_NLOHMANN_JSON "Use nlohmann json" ON)
 
 
 ##########################################################################################
@@ -95,6 +96,27 @@ if(USE_BOX2D)
 
     # add the dependency here to be linked
     list(APPEND LIBRARIES box2d)
+endif()
+
+
+##########################################################################################
+# Nlohmann json Setup
+##########################################################################################
+
+if(USE_NLOHMANN_JSON)
+    set(BUILD_RAYGUI_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+    message(STATUS "Fetching nlohmann json...")
+    FetchContent_Declare(nlohmann_json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG        master
+        GIT_SHALLOW    TRUE
+        GIT_PROGRESS   TRUE
+    )
+    FetchContent_MakeAvailable(nlohmann_json)
+
+    # add the dependency here to be linked
+    list(APPEND LIBRARIES nlohmann_json)
 endif()
 
 
