@@ -3,8 +3,8 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 
 * [Features](#features)
 * [Notes](#notes)
-* [Media](#media)
 * [Building](#building)
+* [Media](#media)
 * [License](#license)
 
 ## Features
@@ -13,9 +13,6 @@ This template simplifies the setup process for Raylib using CMake. It supports a
 ## Notes
 * (Add a controls here)
 * (Add a additional information here)
-
-## Media
-* (Add a screenshot or GIF of your project here)
 
 ## Building
 
@@ -43,6 +40,9 @@ This template simplifies the setup process for Raylib using CMake. It supports a
     ./build_web.sh
     ```
     Now there should be a HTTP Server running under port 8000 to test your project. The URL should be visible in the active terminal.
+
+## Media
+* (Add a screenshot or GIF of your project here)
 
 ## License
 This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
